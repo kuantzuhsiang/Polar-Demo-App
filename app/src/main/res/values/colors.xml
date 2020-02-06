@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="elegantGold">#BD9B60</color>
+    <color name="deepBlue">#001A72</color>
+    <color name="fire">#F99A2A</color>
+    <color name="mediumFire">#FCB869</color>
+    <color name="paleFire">#FDD3A3</color>
+    <color name="silver">#A5A8A9</color>
+    <color name="frost">#62B5E5</color>
+    <color name="coal">#101820</color>
+    <color name="translucentCoal">#44101820</color>
+    <color name="mediumBlue">#9290BF</color>
+    <color name="lightBlue">#C1C1DD</color>
+    <color name="paleBlue">#DDDDED</color>
+</resources>

@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".MainActivity">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/ecg_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/lightBlue"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:id="@+id/ecg_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/mediumBlue"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="ECG"
+                android:textSize="20sp" />
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+        <TextView
+            android:id="@+id/ecg"
+            android:layout_width="150dp"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:text="-"
+            android:textSize="50sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ecg_header" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/acc_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/lightBlue"
+        app:layout_constraintTop_toBottomOf="@id/ecg_wrapper">
+
+        <LinearLayout
+            android:id="@+id/acc_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/mediumBlue"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Accelerometer"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/x"
+            android:layout_width="120dp"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:text="-"
+            android:textSize="50sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/y"
+            app:layout_constraintTop_toBottomOf="@id/acc_header" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:text="x-axis"
+            app:layout_constraintLeft_toLeftOf="@id/x"
+            app:layout_constraintRight_toRightOf="@id/x"
+            app:layout_constraintTop_toBottomOf="@id/x" />
+
+        <TextView
+            android:id="@+id/y"
+            android:layout_width="120dp"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:text="-"
+            android:textSize="50sp"
+            app:layout_constraintLeft_toRightOf="@id/x"
+            app:layout_constraintRight_toLeftOf="@id/z"
+            app:layout_constraintTop_toBottomOf="@id/acc_header" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:text="y-axis"
+            app:layout_constraintLeft_toLeftOf="@id/y"
+            app:layout_constraintRight_toRightOf="@id/y"
+            app:layout_constraintTop_toBottomOf="@id/y" />
+
+        <TextView
+            android:id="@+id/z"
+            android:layout_width="120dp"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:text="-"
+            android:textSize="50sp"
+            app:layout_constraintLeft_toRightOf="@id/y"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/acc_header" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:text="z-axis"
+            app:layout_constraintLeft_toLeftOf="@id/z"
+            app:layout_constraintRight_toRightOf="@id/z"
+            app:layout_constraintTop_toBottomOf="@id/z" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/ppg_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/lightBlue"
+        app:layout_constraintTop_toBottomOf="@id/acc_wrapper">
+
+        <LinearLayout
+            android:id="@+id/ppg_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/mediumBlue"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="PPG"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/ppg0"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:text="-"
+            android:textSize="50sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/ppg1"
+            app:layout_constraintTop_toBottomOf="@id/ppg_header" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:text="ppg0"
+            app:layout_constraintLeft_toLeftOf="@id/ppg0"
+            app:layout_constraintRight_toRightOf="@id/ppg0"
+            app:layout_constraintTop_toBottomOf="@id/ppg0" />
+
+        <TextView
+            android:id="@+id/ppg1"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:text="-"
+            android:textSize="50sp"
+            app:layout_constraintLeft_toRightOf="@id/ppg0"
+            app:layout_constraintRight_toLeftOf="@id/ppg2"
+            app:layout_constraintTop_toBottomOf="@id/ppg_header" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:text="ppg1"
+            app:layout_constraintLeft_toLeftOf="@id/ppg1"
+            app:layout_constraintRight_toRightOf="@id/ppg1"
+            app:layout_constraintTop_toBottomOf="@id/ppg1" />
+
+        <TextView
+            android:id="@+id/ppg2"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:text="-"
+            android:textSize="50sp"
+            app:layout_constraintLeft_toRightOf="@id/ppg1"
+            app:layout_constraintRight_toLeftOf="@id/ambient"
+            app:layout_constraintTop_toBottomOf="@id/ppg_header" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:text="ppg2"
+            app:layout_constraintLeft_toLeftOf="@id/ppg2"
+            app:layout_constraintRight_toRightOf="@id/ppg2"
+            app:layout_constraintTop_toBottomOf="@id/ppg2" />
+
+        <TextView
+            android:id="@+id/ambient"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:text="-"
+            android:textSize="50sp"
+            app:layout_constraintLeft_toRightOf="@id/ppg2"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ppg_header" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:text="ambient"
+            app:layout_constraintLeft_toLeftOf="@id/ambient"
+            app:layout_constraintRight_toRightOf="@id/ambient"
+            app:layout_constraintTop_toBottomOf="@id/ambient" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/ppi_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/lightBlue"
+        app:layout_constraintTop_toBottomOf="@id/ppg_wrapper">
+
+        <LinearLayout
+            android:id="@+id/ppi_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/mediumBlue"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="PPI"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/ppi"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:text="-"
+            android:textSize="50sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/error"
+            app:layout_constraintTop_toBottomOf="@id/ppi_header" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:text="ppi"
+            app:layout_constraintLeft_toLeftOf="@id/ppi"
+            app:layout_constraintRight_toRightOf="@id/ppi"
+            app:layout_constraintTop_toBottomOf="@id/ppi" />
+
+        <TextView
+            android:id="@+id/error"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:text="-"
+            android:textSize="50sp"
+            app:layout_constraintLeft_toRightOf="@id/ppi"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ppi_header" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:text="error estimate"
+            app:layout_constraintLeft_toLeftOf="@id/error"
+            app:layout_constraintRight_toRightOf="@id/error"
+            app:layout_constraintTop_toBottomOf="@id/error" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:id="@+id/connect_button"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:text="connect"
+        app:layout_constraintBottom_toTopOf="@id/ecg_button"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/disconnect_button" />
+
+    <Button
+        android:id="@+id/disconnect_button"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:text="disconnect"
+        app:layout_constraintBottom_toTopOf="@id/acc_button"
+        app:layout_constraintLeft_toRightOf="@id/connect_button"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/ecg_button"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:text="ecg_stream"
+        app:layout_constraintBottom_toTopOf="@id/ohr_ppg_button"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/acc_button" />
+
+    <Button
+        android:id="@+id/acc_button"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:text="acc_stream"
+        app:layout_constraintBottom_toTopOf="@id/ohr_ppi_button"
+        app:layout_constraintLeft_toRightOf="@id/ecg_button"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/connect_button" />
+
+    <Button
+        android:id="@+id/ohr_ppg_button"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:text="ppg_stream"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/ohr_ppi_button"
+        app:layout_constraintTop_toBottomOf="@id/acc_button" />
+
+    <Button
+        android:id="@+id/ohr_ppi_button"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:text="ppi_stream"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/ohr_ppg_button"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/acc_button" />
+
+</android.support.constraint.ConstraintLayout>
