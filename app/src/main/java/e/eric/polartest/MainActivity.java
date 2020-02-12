@@ -28,7 +28,7 @@ import polar.com.sdk.api.model.PolarDeviceInfo;
 import polar.com.sdk.api.model.PolarEcgData;
 //import polar.com.sdk.api.model.PolarExerciseData;
 //import polar.com.sdk.api.model.PolarExerciseEntry;
-//import polar.com.sdk.api.model.PolarHrBroadcastData;
+import polar.com.sdk.api.model.PolarHrBroadcastData;
 import polar.com.sdk.api.model.PolarHrData;
 import polar.com.sdk.api.model.PolarOhrPPGData;
 import polar.com.sdk.api.model.PolarOhrPPIData;
@@ -37,14 +37,14 @@ import polar.com.sdk.api.model.PolarSensorSetting;
 public class MainActivity extends AppCompatActivity {
     private final static String TAG = MainActivity.class.getSimpleName();
     PolarBleApi api;
-//    Disposable broadcastDisposable;
+    Disposable broadcastDisposable;
     Disposable ecgDisposable;
     Disposable accDisposable;
     Disposable ppgDisposable;
     Disposable ppiDisposable;
-//    Disposable scanDisposable;
+    Disposable scanDisposable;
     String DEVICE_ID = "2FD0EA26";
-//    Disposable autoConnectDisposable;
+    Disposable autoConnectDisposable;
 //    PolarExerciseEntry exerciseEntry;
 
     @Override
@@ -61,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
         final Button acc = this.findViewById(R.id.acc_button);
         final Button ppg = this.findViewById(R.id.ohr_ppg_button);
         final Button ppi = this.findViewById(R.id.ohr_ppi_button);
+        final Button autoConnect = this.findViewById(R.id.auto_connect_button);
+        final Button scan = this.findViewById(R.id.scan);
+        final Button broadcast = this.findViewById(R.id.broadcast);
 
         final TextView ecgTV = this.findViewById(R.id.ecg);
         final TextView accxTV = this.findViewById(R.id.x);
@@ -187,6 +190,95 @@ public class MainActivity extends AppCompatActivity {
                     api.disconnectFromDevice(DEVICE_ID);
                 } catch (PolarInvalidArgument polarInvalidArgument) {
                     polarInvalidArgument.printStackTrace();
+                }
+            }
+        });
+
+        autoConnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(autoConnectDisposable != null) {
+                    autoConnectDisposable.dispose();
+                    autoConnectDisposable = null;
+                }
+                autoConnectDisposable = api.autoConnectToDevice(-50, "180D", null).subscribe(
+                        new Action() {
+                            @Override
+                            public void run() throws Exception {
+                                Log.d(TAG,"auto connect search complete");
+                            }
+                        },
+                        new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+                                Log.e(TAG,"" + throwable.toString());
+                            }
+                        }
+                );
+            }
+        });
+
+        scan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(scanDisposable == null) {
+                    scanDisposable = api.searchForDevice().observeOn(AndroidSchedulers.mainThread()).subscribe(
+                            new Consumer<PolarDeviceInfo>() {
+                                @Override
+                                public void accept(PolarDeviceInfo polarDeviceInfo) throws Exception {
+                                    Log.d(TAG, "polar device found id: " + polarDeviceInfo.deviceId + " address: " + polarDeviceInfo.address + " rssi: " + polarDeviceInfo.rssi + " name: " + polarDeviceInfo.name + " isConnectable: " + polarDeviceInfo.isConnectable);
+                                }
+                            },
+                            new Consumer<Throwable>() {
+                                @Override
+                                public void accept(Throwable throwable) throws Exception {
+                                    Log.d(TAG, "" + throwable.getLocalizedMessage());
+                                }
+                            },
+                            new Action() {
+                                @Override
+                                public void run() throws Exception {
+                                    Log.d(TAG, "complete");
+                                }
+                            }
+                    );
+                }else{
+                    scanDisposable.dispose();
+                    scanDisposable = null;
+                }
+            }
+        });
+
+        broadcast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(broadcastDisposable == null) {
+                    broadcastDisposable = api.startListenForPolarHrBroadcasts(null).subscribe(
+                            new Consumer<PolarHrBroadcastData>() {
+                                @Override
+                                public void accept(PolarHrBroadcastData polarBroadcastData) throws Exception {
+                                    Log.d(TAG,"HR BROADCAST " +
+                                            polarBroadcastData.polarDeviceInfo.deviceId + " HR: " +
+                                            polarBroadcastData.hr + " batt: " +
+                                            polarBroadcastData.batteryStatus);
+                                }
+                            },
+                            new Consumer<Throwable>() {
+                                @Override
+                                public void accept(Throwable throwable) throws Exception {
+                                    Log.e(TAG,""+throwable.getLocalizedMessage());
+                                }
+                            },
+                            new Action() {
+                                @Override
+                                public void run() throws Exception {
+                                    Log.d(TAG,"complete");
+                                }
+                            }
+                    );
+                }else{
+                    broadcastDisposable.dispose();
+                    broadcastDisposable = null;
                 }
             }
         });
