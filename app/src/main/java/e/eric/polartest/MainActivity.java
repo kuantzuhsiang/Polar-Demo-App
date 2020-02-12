@@ -1,11 +1,14 @@
 package e.eric.polartest;
 
+import android.Manifest;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.reactivestreams.Publisher;
 
@@ -88,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void deviceConnected(PolarDeviceInfo polarDeviceInfo) {
                 Log.d(TAG,"CONNECTED: " + polarDeviceInfo.deviceId);
+                Toast.makeText(MainActivity.this, "CONNECTED: " + polarDeviceInfo.deviceId, Toast.LENGTH_SHORT).show();
                 DEVICE_ID = polarDeviceInfo.deviceId;
             }
 
@@ -349,5 +353,34 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && savedInstanceState == null) {
+            this.requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        if(requestCode == 1) {
+            Log.d(TAG,"bt ready");
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        api.backgroundEntered();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        api.foregroundEntered();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        api.shutDown();
     }
 }
